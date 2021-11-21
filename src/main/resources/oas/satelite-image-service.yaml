@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  description: Simple backend application that is capable of working with image metadata. \
+    \ Exposed three endpoints for listing features, retrieving a specific feature by its ID \
+    \ and to return an actual image from a base64 encoded string
+  version: 0.0.1
+  title: Satelite image service
+  contact:
+    email: drop.to.aleksandr@gmail.com
+servers:
+  - url: https://localhost:8080
+tags:
+  - name: Feature
+paths:
+  /features:
+    get:
+      summary: return a list of features
+      tags:
+        - Feature
+      operationId: getFeatures
+      responses:
+        '200':
+          description: List of features recieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Feature'
+  /features/{id}:
+    get:
+      summary: return a single representation of a feature
+      tags:
+        - Feature
+      operationId: getFeature
+      parameters:
+        - name: id
+          in: path
+          description: ID of feature
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Single feature is found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feature'
+  /features/{id}/quicklook:
+    get:
+      summary: return the image for the given id
+      tags:
+        - Feature
+      operationId: getQuicklook
+      parameters:
+        - name: id
+          in: path
+          description: ID of feature
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: feature image is found
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+components:
+  schemas:
+    Feature:
+      required:
+        - id
+        - missionName
+        - timestamp
+        - beginViewingDate
+        - endViewingDate
+      type: object
+      properties:
+        id:
+          type: string
+          example: '39c2f29e-c0f8-4a39-a98b-deed547d6aea'
+        missionName:
+          type: string
+          example: 'Sentinel-1B'
+        timestamp:
+          type: integer
+          format: int32
+          example: 1554831167697
+        beginViewingDate:
+          type: integer
+          format: int32
+          example: 1554831167697
+        endViewingDate:
+          type: integer
+          format: int32
+          example: 1554831167697
