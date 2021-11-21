@@ -134,7 +134,6 @@
 								<performBeanValidation>true</performBeanValidation>
 								<useBeanValidation>true</useBeanValidation>
 							</configOptions>
-
                         </configuration>
 					</execution>
 				</executions>
@@ -150,6 +149,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<mainClass>com.akriuchk.imageservice.ImageServiceApplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
