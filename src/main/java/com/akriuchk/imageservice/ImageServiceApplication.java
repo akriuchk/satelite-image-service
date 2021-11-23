@@ -1,5 +1,6 @@
 package com.akriuchk.imageservice;
 
+import com.akriuchk.imageservice.service.FeatureImportService;
 import com.akriuchk.imageservice.service.Parser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -7,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+
+import java.util.stream.Stream;
 
 @SpringBootApplication
 public class ImageServiceApplication {
@@ -19,9 +22,12 @@ public class ImageServiceApplication {
     @Profile("demo")
     public CommandLineRunner initialData(
             @Value("${data.input.filename:source-data.json}") String dataSource,
-            Parser parser) {
+            final Parser parser,
+            final FeatureImportService featureImportService
+            ) {
         return args -> {
-            parser.parse(dataSource);
+            final Stream<Parser.PreFeature> preFeatureStream = parser.parseFeatures(parser.findFile(dataSource));
+            featureImportService.importFeatures(preFeatureStream);
         };
     }
 

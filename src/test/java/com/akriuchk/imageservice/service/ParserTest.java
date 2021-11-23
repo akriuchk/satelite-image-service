@@ -4,10 +4,14 @@ import com.akriuchk.imageservice.exception.ParsingFailedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
 
@@ -38,4 +42,25 @@ class ParserTest {
     }
 
 
+    @Test
+    void parseFeatures() throws Exception{
+        final FileInputStream inputStream = parser.findFile("classpath:test-array.json");
+        final Stream<Parser.PreFeature> preStream = parser.parseFeatures(inputStream);
+
+        assertThat(preStream).hasSize(2);
+    }
+
+    @Test
+    void shouldReturnFileinputStreamWhenFileisPresent() {
+        assertDoesNotThrow(() -> {
+            final FileInputStream inputStream = parser.findFile("classpath:test-array.json");
+            assertThat(inputStream).isNotEmpty();
+        });
+    }
+
+    @Test
+    void shouldThrowExceptionWhenFilenotfound() {
+        assertThrows(FileNotFoundException.class,
+                () -> parser.findFile("classpath:a"));
+    }
 }
