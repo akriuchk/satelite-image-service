@@ -22,6 +22,7 @@
 		<swagger.annotations.version>1.6.3</swagger.annotations.version>
 		<jackson.databind.nullable.version>0.2.1</jackson.databind.nullable.version>
 		<openapi.generator.maven.plugin.version>4.3.1</openapi.generator.maven.plugin.version>
+		<modelmapper.version>2.3.5</modelmapper.version>
 	</properties>
 
 	<dependencies>
@@ -48,6 +49,11 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${modelmapper.version}</version>
 		</dependency>
 
 		<dependency>
