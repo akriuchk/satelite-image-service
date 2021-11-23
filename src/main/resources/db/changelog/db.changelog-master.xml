@@ -4,12 +4,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-<!--    <changeSet author="akriuchk"-->
-<!--               id="1"-->
-<!--               failOnError="true"-->
-<!--               logicalFilePath="classpath:/db/changelog/db.changelog-master.sql"-->
-<!--    >-->
-<!--        <sqlFile path="db.changelog-master.sql" relativeToChangelogFile="true"/>-->
-<!--    </changeSet>-->
+    <changeSet author="akriuchk"
+               id="1"
+               failOnError="true"
+               logicalFilePath="classpath:/db/changelog/db.changelog-master.sql"
+    >
+        <sqlFile path="db.changelog-master.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 
 </databaseChangeLog>
