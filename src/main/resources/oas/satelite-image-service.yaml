@@ -87,13 +87,13 @@ components:
           example: 'Sentinel-1B'
         timestamp:
           type: integer
-          format: int32
+          format: int64
           example: 1554831167697
         beginViewingDate:
           type: integer
-          format: int32
+          format: int64
           example: 1554831167697
         endViewingDate:
           type: integer
-          format: int32
+          format: int64
           example: 1554831167697

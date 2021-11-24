@@ -76,7 +76,9 @@ public class FeatureImportService {
 
         public void add(Feature feature, Image img) {
             features.add(feature);
-            images.add(img);
+            if (img != null) {
+                images.add(img);
+            }
         }
 
         public boolean isFull() {
