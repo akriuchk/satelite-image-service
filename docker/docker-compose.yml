@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  image-service:
+    image: 'akriuchk/image-service-postgres:latest'
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: image-service
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      - SPRING_PROFILES_ACTIVE=demo
+
+  postgres:
+    image: 'postgres:13.1-alpine'
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres

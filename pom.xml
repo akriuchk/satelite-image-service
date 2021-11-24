@@ -156,6 +156,8 @@
 						</exclude>
 					</excludes>
 					<mainClass>com.akriuchk.imageservice.ImageServiceApplication</mainClass>
+					<finalName>app</finalName>
+					<outputDirectory>./docker</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>

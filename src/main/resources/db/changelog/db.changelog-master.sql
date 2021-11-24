@@ -6,7 +6,7 @@ create sequence image_seq start with 1000 increment by 50;
 
 create table feature (
 id                  bigint not null primary key,
-uuid                uuid   not null,
+uuid                uuid   not null unique,
 timestamp           bigint,
 begin_viewing_date  bigint,
 end_viewing_date    bigint,
