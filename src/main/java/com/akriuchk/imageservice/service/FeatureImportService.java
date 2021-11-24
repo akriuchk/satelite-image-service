@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -44,9 +45,13 @@ public class FeatureImportService {
         preFeatureStream
                 .forEach(pre -> {
                     Feature feature = map(pre);
-                    Image img = extract(pre);
+                    Optional.ofNullable(extract(pre))
+                            .ifPresent(img -> {
+                                img.setFeature(feature);
+                                bucket.add(img);
+                            });
 
-                    bucket.add(feature, img);
+                    bucket.add(feature);
 
                     if (bucket.isFull()) {
                         featureRepository.saveAll(bucket.getFeatures());
@@ -74,11 +79,12 @@ public class FeatureImportService {
         @Getter
         private final Set<Image> images = new HashSet<>();
 
-        public void add(Feature feature, Image img) {
+        public void add(Feature feature) {
             features.add(feature);
-            if (img != null) {
-                images.add(img);
-            }
+        }
+
+        public void add(Image img) {
+            images.add(img);
         }
 
         public boolean isFull() {

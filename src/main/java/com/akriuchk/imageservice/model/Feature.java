@@ -1,9 +1,6 @@
 package com.akriuchk.imageservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -28,5 +25,10 @@ public class Feature {
     private Long beginViewingDate;
     private Long endViewingDate;
     private String missionName;
+
+    @OneToOne(mappedBy = "feature",
+            fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Image image;
 
 }

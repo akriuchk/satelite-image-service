@@ -5,6 +5,7 @@ import com.akriuchk.imageservice.client.model.Feature;
 import com.akriuchk.imageservice.service.FeatureService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,6 @@ public class FeatureController implements FeatureApiDelegate {
 
     @Override
     public ResponseEntity<Resource> getQuicklook(String id) {
-        return FeatureApiDelegate.super.getQuicklook(id);
+        return ResponseEntity.ok(new ByteArrayResource(featureService.getFeatureQuicklook(id)));
     }
 }

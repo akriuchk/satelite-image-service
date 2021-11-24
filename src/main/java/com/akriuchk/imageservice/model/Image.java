@@ -19,6 +19,10 @@ public class Image {
 
     private UUID uuid;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "feature_id")
+    private Feature feature;
+
     @Basic
     private byte[] content;
 }
